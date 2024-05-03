@@ -1,7 +1,12 @@
 package com.guim.filmmapp.di
 
+import android.content.Context
+import androidx.room.Room
+import com.guim.filmmapp.data.local.MovieDao
+import com.guim.filmmapp.data.local.MovieDataBase
 import com.guim.filmmapp.data.network.MovieApi
 import com.guim.filmmapp.data.repository.FilmmRepository
+import com.guim.filmmapp.data.repository.FilmmRepositoryRoom
 import com.guim.filmmapp.domain.repository.RemoteDataRepository
 import com.guim.filmmapp.domain.use_case.GetMovieDataUseCase
 import com.guim.filmmapp.domain.use_case.GetSearchDataUseCase
@@ -12,6 +17,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -51,5 +57,23 @@ object AppModule {
             getSearchDataUseCase = GetSearchDataUseCase(repository)
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideDataBase(@ApplicationContext context: Context): MovieDataBase {
+        return Room.databaseBuilder(
+            context,
+            MovieDataBase::class.java,
+            "local_db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDao(db: MovieDataBase): MovieDao = db.movieDao()
+
+    @Provides
+    @Singleton
+    fun provideRespositoryRoom(dao: MovieDao): FilmmRepositoryRoom = FilmmRepositoryRoom(dao)
 
 }
