@@ -18,6 +18,6 @@ interface MovieDao {
     suspend fun findOneMovie(title: String): MovieData
 
     @Query("SELECT * FROM MovieData")
-    fun findAllMovies(): Flow<List<MovieData>>
+    suspend fun findAllMovies(): List<MovieData>
 
 }

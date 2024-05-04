@@ -15,6 +15,6 @@ class FilmmRepositoryRoom @Inject constructor(
 
     suspend fun findOneMovie(title: String): MovieData = dao.findOneMovie(title)
 
-    fun findAllMovies(): Flow<List<MovieData>> = dao.findAllMovies()
+    suspend fun findAllMovies(): List<MovieData> = dao.findAllMovies()
 
 }

@@ -1,7 +1,6 @@
 package com.guim.filmmapp.domain.use_case
 
 import com.example.movieapp.data.dto.MovieDataDto
-import com.guim.filmmapp.data.repository.FilmmRepository
 import com.guim.filmmapp.domain.repository.RemoteDataRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
