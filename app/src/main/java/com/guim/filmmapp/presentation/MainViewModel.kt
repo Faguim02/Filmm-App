@@ -9,10 +9,7 @@ import com.example.movieapp.domain.model.SearchResult
 import com.guim.filmmapp.domain.use_case.UseCases
 import com.guim.filmmapp.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,6 +24,11 @@ class MainViewModel @Inject constructor(
     private val _searchResponse = MutableStateFlow<Result<SearchResult>>(Result.Idle)
     val searchResponse = _searchResponse.asStateFlow()
 
+    private val _moviesDataRoomResponse = MutableStateFlow<Flow<List<MovieData>>>(emptyFlow())
+    val moviesDataRoomResponse = _moviesDataRoomResponse.asStateFlow()
+
+    private val _movieDataRoomResponse = MutableStateFlow<Flow<MovieData>>(emptyFlow())
+    val movieDataRoomResponse = _movieDataRoomResponse.asStateFlow()
 
     fun getMovieData( title: String ) = viewModelScope.launch {
         useCases.getMovieDataUseCase.invoke(title)
@@ -50,6 +52,22 @@ class MainViewModel @Inject constructor(
                 val result = it.toSearchResult()
                 _searchResponse.value = Result.Sucess(result)
             }
+    }
+
+    fun addMovieData(movieData: MovieData) = viewModelScope.launch {
+        useCases.addMovieDataUseCase.invoke(movieData)
+    }
+
+    fun removeMovieDataRoom(movieData: MovieData) = viewModelScope.launch {
+        useCases.removeMovieDataUseCase.invoke(movieData)
+    }
+
+    fun findAllMoviesRoom() = viewModelScope.launch {
+        _moviesDataRoomResponse.value = useCases.findAllMovieDataCaseUse.invoke()
+    }
+
+    fun findOneMovieRoom(title: String) = viewModelScope.launch {
+        _movieDataRoomResponse.value = useCases.findOneMovieDataCaseUse.invoke(title)
     }
 
 }
