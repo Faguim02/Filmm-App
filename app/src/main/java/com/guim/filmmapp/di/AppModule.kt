@@ -8,9 +8,7 @@ import com.guim.filmmapp.data.network.MovieApi
 import com.guim.filmmapp.data.repository.FilmmRepository
 import com.guim.filmmapp.data.repository.FilmmRepositoryRoom
 import com.guim.filmmapp.domain.repository.RemoteDataRepository
-import com.guim.filmmapp.domain.use_case.GetMovieDataUseCase
-import com.guim.filmmapp.domain.use_case.GetSearchDataUseCase
-import com.guim.filmmapp.domain.use_case.UseCases
+import com.guim.filmmapp.domain.use_case.*
 import com.guim.filmmapp.util.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -51,10 +49,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUseCase(repository: RemoteDataRepository): UseCases {
+    fun provideUseCase(repository: RemoteDataRepository, repositoryRoom: FilmmRepositoryRoom): UseCases {
         return UseCases(
             getMovieDataUseCase = GetMovieDataUseCase(repository),
-            getSearchDataUseCase = GetSearchDataUseCase(repository)
+            getSearchDataUseCase = GetSearchDataUseCase(repository),
+            removeMovieDataUseCase = RemoveMovieDataUseCase(repositoryRoom),
+            addMovieDataUseCase = AddMovieDataUseCase(repositoryRoom),
+            findAllMovieDataCaseUse = FindAllMovieDataCaseUse(repositoryRoom),
+            findOneMovieDataCaseUse = FindOneMovieDataCaseUse(repositoryRoom)
         )
     }
 
@@ -74,6 +76,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRespositoryRoom(dao: MovieDao): FilmmRepositoryRoom = FilmmRepositoryRoom(dao)
+    fun provideRepositoryRoom(dao: MovieDao): FilmmRepositoryRoom = FilmmRepositoryRoom(dao)
 
 }

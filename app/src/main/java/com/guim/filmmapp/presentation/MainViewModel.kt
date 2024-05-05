@@ -6,6 +6,7 @@ import com.example.movieapp.data.dto.toMovieDate
 import com.example.movieapp.data.dto.toSearchResult
 import com.example.movieapp.domain.model.MovieData
 import com.example.movieapp.domain.model.SearchResult
+import com.guim.filmmapp.domain.model.MovieDB
 import com.guim.filmmapp.domain.use_case.UseCases
 import com.guim.filmmapp.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,10 +25,10 @@ class MainViewModel @Inject constructor(
     private val _searchResponse = MutableStateFlow<Result<SearchResult>>(Result.Idle)
     val searchResponse = _searchResponse.asStateFlow()
 
-    private val _moviesDataRoomResponse = MutableStateFlow<Flow<List<MovieData>>>(emptyFlow())
+    private val _moviesDataRoomResponse = MutableStateFlow<Flow<List<MovieDB>>>(emptyFlow())
     val moviesDataRoomResponse = _moviesDataRoomResponse.asStateFlow()
 
-    private val _movieDataRoomResponse = MutableStateFlow<Flow<MovieData>>(emptyFlow())
+    private val _movieDataRoomResponse = MutableStateFlow<Flow<MovieDB>>(emptyFlow())
     val movieDataRoomResponse = _movieDataRoomResponse.asStateFlow()
 
     fun getMovieData( title: String ) = viewModelScope.launch {
@@ -54,12 +55,12 @@ class MainViewModel @Inject constructor(
             }
     }
 
-    fun addMovieData(movieData: MovieData) = viewModelScope.launch {
-        useCases.addMovieDataUseCase.invoke(movieData)
+    fun addMovieData(movieDB: MovieDB) = viewModelScope.launch {
+        useCases.addMovieDataUseCase.invoke(movieDB)
     }
 
-    fun removeMovieDataRoom(movieData: MovieData) = viewModelScope.launch {
-        useCases.removeMovieDataUseCase.invoke(movieData)
+    fun removeMovieDataRoom(movieDB: MovieDB) = viewModelScope.launch {
+        useCases.removeMovieDataUseCase.invoke(movieDB)
     }
 
     fun findAllMoviesRoom() = viewModelScope.launch {

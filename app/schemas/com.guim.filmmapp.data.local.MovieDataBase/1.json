@@ -1,0 +1,136 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "13affec53e6d3f762c93a953af2fa2a8",
+    "entities": [
+      {
+        "tableName": "MovieDB",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `year` TEXT NOT NULL, `rated` TEXT NOT NULL, `released` TEXT NOT NULL, `runtime` TEXT NOT NULL, `genre` TEXT NOT NULL, `director` TEXT NOT NULL, `writer` TEXT NOT NULL, `actors` TEXT NOT NULL, `plot` TEXT NOT NULL, `language` TEXT NOT NULL, `country` TEXT NOT NULL, `awards` TEXT NOT NULL, `poster` TEXT NOT NULL, `imdbRating` TEXT NOT NULL, `boxOffice` TEXT NOT NULL, `production` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rated",
+            "columnName": "rated",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "released",
+            "columnName": "released",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "runtime",
+            "columnName": "runtime",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "genre",
+            "columnName": "genre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "director",
+            "columnName": "director",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "writer",
+            "columnName": "writer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actors",
+            "columnName": "actors",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plot",
+            "columnName": "plot",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "awards",
+            "columnName": "awards",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "poster",
+            "columnName": "poster",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imdbRating",
+            "columnName": "imdbRating",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "boxOffice",
+            "columnName": "boxOffice",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "production",
+            "columnName": "production",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '13affec53e6d3f762c93a953af2fa2a8')"
+    ]
+  }
+}

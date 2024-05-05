@@ -1,23 +1,21 @@
 package com.guim.filmmapp.data.local
 
 import androidx.room.*
-import com.example.movieapp.domain.model.MovieData
-import kotlinx.coroutines.flow.Flow
-//import retrofit2.http.Query
+import com.guim.filmmapp.domain.model.MovieDB
 
 @Dao
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addMovie(movieData: MovieData)
+    suspend fun addMovie(movieDB: MovieDB)
 
     @Delete
-    suspend fun removeMovie(movieData: MovieData)
+    suspend fun removeMovie(movieDB: MovieDB)
 
-    @Query("SELECT * FROM MovieData WHERE title = :title")
-    suspend fun findOneMovie(title: String): MovieData
+    @Query("SELECT * FROM MovieDB WHERE title = :title")
+    suspend fun findOneMovie(title: String): MovieDB
 
-    @Query("SELECT * FROM MovieData")
-    suspend fun findAllMovies(): List<MovieData>
+    @Query("SELECT * FROM MovieDB")
+    suspend fun findAllMovies(): List<MovieDB>
 
 }
