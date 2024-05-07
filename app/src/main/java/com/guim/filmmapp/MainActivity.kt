@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.guim.filmmapp.presentation.search_screen.SearchScreen
 import com.guim.filmmapp.ui.theme.FilmmAppTheme
 
 class MainActivity : ComponentActivity() {
