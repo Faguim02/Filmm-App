@@ -25,6 +25,7 @@ import com.example.movieapp.domain.model.SearchResult
 import com.guim.filmmapp.R
 import com.guim.filmmapp.presentation.search_screen.componets.ListMovies
 import com.guim.filmmapp.presentation.search_screen.componets.MovieEmpty
+import com.guim.filmmapp.presentation.search_screen.componets.TopBarComponent
 import com.guim.filmmapp.ui.theme.FilmmAppTheme
 
 @Composable
@@ -51,26 +52,7 @@ fun SearchScreen() {
             .background(MaterialTheme.colorScheme.background)
             .padding(vertical = 8.dp),
         topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Box(modifier = Modifier.size(32.dp))
-                Image(
-                    modifier = Modifier
-                        .width(150.dp),
-                    painter = painterResource(R.drawable.icon),
-                    contentDescription = null
-                )
-                IconButton(onClick = {}){
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = null
-                    )
-                }
-            }
+            TopBarComponent()
         }
     ) {paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
