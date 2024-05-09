@@ -28,7 +28,7 @@ import com.example.movieapp.domain.model.MovieData
 import com.guim.filmmapp.ui.theme.FilmmAppTheme
 
 @Composable
-fun MovieScreen(movieData: MovieData) {
+fun MovieScreen(title: String) {
 
     var movieFavorited by remember { mutableStateOf(false) }
 
@@ -37,7 +37,7 @@ fun MovieScreen(movieData: MovieData) {
         else -> Icons.Rounded.Favorite
     }
 
-    val movieGenres = movieData.genre.split(",").map { it.trim() }
+    //val movieGenres = movieData.genre.split(",").map { it.trim() }
 
     Scaffold {paddingValues ->
         Column(
@@ -53,13 +53,13 @@ fun MovieScreen(movieData: MovieData) {
                         .fillMaxWidth()
                         .height(250.dp)
                         .background(Color.Black),
-                    model = movieData.poster,
+                    model = "movieData.poster", //TODO: Substitua pelo certo
                 )
                 Text(
                     modifier = Modifier
                         .background(Color.Black, RoundedCornerShape(8.dp))
                         .padding(4.dp),
-                    text = movieData.runtime,
+                    text = "movieData.runtime", //TODO: Substitua pelo certo
                     style = TextStyle(
                         color = Color.White
                     )
@@ -74,7 +74,7 @@ fun MovieScreen(movieData: MovieData) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = movieData.title,
+                    text = "movieData.title", //TODO: Substitua pelo certo
                     style = TextStyle(
                         fontSize = 26.sp,
                         fontWeight = FontWeight.Bold,
@@ -93,26 +93,26 @@ fun MovieScreen(movieData: MovieData) {
                 }
             }
 
-            Column(
-                modifier = Modifier.wrapContentHeight()
-            ) {
-                LazyVerticalGrid(columns = GridCells.Fixed(4)) {
-                    items(movieGenres) { genre ->
-                        SuggestionChip(
-                            modifier = Modifier.padding(horizontal = 8.dp),
-                            colors = SuggestionChipDefaults.suggestionChipColors(
-                                containerColor = MaterialTheme.colorScheme.secondary
-                            ),
-                            onClick = {},
-                            label = {
-                                Text(
-                                    text = genre
-                                )
-                            }
-                        )
-                    }
-                }
-            }
+//            Column(
+//                modifier = Modifier.wrapContentHeight()
+//            ) {
+//                LazyVerticalGrid(columns = GridCells.Fixed(4)) {
+//                    items(movieGenres) { genre ->
+//                        SuggestionChip(
+//                            modifier = Modifier.padding(horizontal = 8.dp),
+//                            colors = SuggestionChipDefaults.suggestionChipColors(
+//                                containerColor = MaterialTheme.colorScheme.secondary
+//                            ),
+//                            onClick = {},
+//                            label = {
+//                                Text(
+//                                    text = genre
+//                                )
+//                            }
+//                        )
+//                    }
+//                }
+//            }
 
             LazyColumn {
                 item {
@@ -121,18 +121,18 @@ fun MovieScreen(movieData: MovieData) {
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Text(
-                            text = "Autores: ${movieData.actors}",
+                            text = "Autores: {movieData.actors}", //TODO: Coloque o $
                             fontSize = 18.sp
                         )
                         Text(
-                            text = "Criado em: ${movieData.year}",
+                            text = "Criado em: {movieData.year}", //TODO: Coloque o $
                             fontSize = 18.sp
                         )
 
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Text(
-                            text = movieData.plot,
+                            text = "movieData.plot", //TODO: Coloque o $
                             style = TextStyle(
                                 textAlign = TextAlign.Justify,
                                 fontSize = 18.sp
@@ -149,32 +149,4 @@ fun MovieScreen(movieData: MovieData) {
 @Composable
 fun MovieScreenPreview() {
 
-    val movie = MovieData(
-        title = "The Shawshank",
-        year = "1994",
-        rated = "R",
-        released = "10 Jun 1994",
-        runtime = "142 min",
-        genre = "Drama, Romance, amor, yat, ausi, a",
-        director = "Frank Darabont",
-        writer = "Stephen King (short story \"Rita Hayworth and Shawshank Redemption\"), Frank Darabont (screenplay)",
-        actors = "Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler",
-        plot = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-        language = "English",
-        country = "USA",
-        awards = "Nominated for 7 Oscars. Another 21 wins & 35 nominations.",
-        poster = "https://www.imdb.com/title/tt0111161/mediaviewer/rm3166845184/",
-        ratings = listOf(
-            Rating(source = "Internet Movie Database", value = "9.3/10"),
-            Rating(source = "Rotten Tomatoes", value = "91%"),
-            Rating(source = "Metacritic", value = "80/100")
-        ),
-        imdbRating = "9.3",
-        boxOffice = "$28,341,469",
-        production = "Columbia Pictures"
-    )
-
-    FilmmAppTheme {
-        MovieScreen(movie)
-    }
 }
