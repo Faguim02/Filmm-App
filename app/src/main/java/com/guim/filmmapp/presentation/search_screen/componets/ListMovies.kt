@@ -10,33 +10,38 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.movieapp.data.dto.Movie
 import com.example.movieapp.domain.model.SearchResult
 import com.guim.filmmapp.ui.theme.FilmmAppTheme
 
 
 @Composable
-fun ListMovies(searchResult: List<Movie>) {
+fun ListMovies(searchResult: SearchResult, onItemClick: (title: String) -> Unit) {
 
     LazyColumn {
-        items(searchResult) {movie ->
-            CardMovie(movie)
+        items(searchResult.movies) {movie ->
+            CardMovie(movie, onItemClick = onItemClick)
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CardMovie(
-    movie: Movie
+    movie: Movie,
+    onItemClick: (title: String) -> Unit
 ) {
     Card(
+        onClick = { onItemClick(movie.title) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp),
@@ -48,10 +53,13 @@ fun CardMovie(
     ) {
         Row {
 
-            Box(
+            AsyncImage(
+                contentDescription = "null",
                 modifier = Modifier
                     .size(100.dp)
-                    .background(Color.Black, RoundedCornerShape(8.dp))
+                    .background(Color.Black, RoundedCornerShape(4.dp)),
+                model = movie.poster,
+                contentScale = ContentScale.Crop
             )
 
             Spacer(modifier = Modifier.width(8.dp))
@@ -73,20 +81,20 @@ fun CardMovie(
     }
 }
 
-@Composable
-@Preview()
-fun ListMoviePreview() {
-    FilmmAppTheme {
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(vertical = 8.dp)
-        ) { padding ->
-            Column(modifier = Modifier.padding(padding)) {
-                //ListMovies()
-            }
-        }
-
-    }
-}
+//@Composable
+//@Preview()
+//fun ListMoviePreview() {
+//    FilmmAppTheme {
+//        Scaffold(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .background(MaterialTheme.colorScheme.background)
+//                .padding(vertical = 8.dp)
+//        ) { padding ->
+//            Column(modifier = Modifier.padding(padding)) {
+//                ListMovies()
+//            }
+//        }
+//
+//    }
+//}

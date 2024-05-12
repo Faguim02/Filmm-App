@@ -56,7 +56,7 @@ fun FavoritesScreen() {
 
             when {
                 movies.isEmpty() -> MovieEmpty()
-                else -> ListMovies(movies)
+                else -> Unit
             }
 
         }
